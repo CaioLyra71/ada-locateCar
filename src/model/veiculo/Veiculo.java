@@ -4,19 +4,22 @@ import java.math.BigDecimal;
 
 public abstract class Veiculo {
     private String nomeVeiculo;
+    private String tipoVeiculo;
     private String placaVeiculo;
     private Boolean estaDisponivel;
     private BigDecimal valorDiaria;
 
 
-    public Veiculo(String nomeVeiculo, String placaVeiculo, Boolean estaDisponivel, BigDecimal valorDiaria) {
+    public Veiculo(String nomeVeiculo, String tipoVeiculo, String placaVeiculo, Boolean estaDisponivel, BigDecimal valorDiaria) {
         this.nomeVeiculo = nomeVeiculo;
+        this.tipoVeiculo = tipoVeiculo;
         this.placaVeiculo = placaVeiculo;
         this.estaDisponivel = estaDisponivel;
         this.valorDiaria = valorDiaria;
     }
 
-    public Veiculo() {}
+    public Veiculo() {
+    }
 
     public String getNomeVeiculo() {
         return nomeVeiculo;
