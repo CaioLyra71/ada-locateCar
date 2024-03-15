@@ -5,7 +5,7 @@ import java.util.Scanner;
 public abstract class MenuAbstrato {
 
     private final ItemMenu[] itensMenu;
-    private final Scanner scanner;
+    protected final Scanner scanner;
 
     public MenuAbstrato(ItemMenu[] itensMenu, Scanner scanner) {
         this.itensMenu = itensMenu;
@@ -16,11 +16,12 @@ public abstract class MenuAbstrato {
         for(ItemMenu itemMenu : itensMenu) {
             System.out.println(itemMenu.getCodigo() + " - " + itemMenu.getTexto());
         }
-        System.out.println("Informe o número da opção: ");
+        System.out.print("Informe o número da opção: ");
         Integer opcao = scanner.nextInt();
-        executarOpcao(opcao, scanner);
+        System.out.println();
+        executarOpcao(opcao);
     }
 
-    protected abstract void executarOpcao(Integer opcao, Scanner scanner);
+    protected abstract void executarOpcao(Integer opcao);
 }
 
