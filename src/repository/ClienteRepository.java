@@ -4,17 +4,21 @@ import model.cliente.Cliente;
 
 public class ClienteRepository implements Repository<Cliente> {
     @Override
-    public Boolean save(Cliente cliente) {
+    public Boolean salvar(Cliente cliente) {
         return null;
     }
 
     @Override
-    public Cliente update(java.lang.String id, Cliente cliente) {
+    public Cliente atualizar(java.lang.String id, Cliente cliente) {
         return null;
     }
 
     @Override
-    public Cliente findById(java.lang.String id) {
+    public Boolean deletar(String id) {
+        return null;
+    }
+    @Override
+    public Cliente buscarPorId(String id) {
         return null;
     }
 }
