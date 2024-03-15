@@ -1,7 +1,8 @@
 package repository;
 
 public interface Repository<T>{
-    Boolean save(T t);
-    T findById(String id);
-    T update(String id, T t);
+    Boolean salvar(T t);
+    T buscarPorId(String id);
+    T atualizar(String id, T t);
+    Boolean deletar(String id);
 }
