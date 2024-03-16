@@ -1,25 +1,27 @@
 package model.locacao;
 
 import model.cliente.Cliente;
+import model.exceptions.VeiculoNaoEncontradoException;
 import model.veiculo.Veiculo;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
 public abstract class Locacao {
     private Cliente cliente;
-    private Veiculo veiculo;
+    private Set<Veiculo> veiculos;
     private String localDevolucao;
     private LocalDateTime dataReserva;
     private LocalDateTime dataDevolucaoPrevista;
     private BigDecimal desconto;
 
 
-    public Locacao(Cliente cliente, Veiculo veiculo, String localDevolucao, LocalDateTime dataReserva, LocalDateTime dataDevolucaoPrevista, BigDecimal desconto) {
+    public Locacao(Cliente cliente, Set<Veiculo> veiculos, String localDevolucao, LocalDateTime dataReserva, LocalDateTime dataDevolucaoPrevista, BigDecimal desconto) {
         this.cliente = cliente;
-        this.veiculo = veiculo;
+        this.veiculos = veiculos;
         this.localDevolucao = localDevolucao;
         this.dataReserva = dataReserva;
         this.dataDevolucaoPrevista = dataDevolucaoPrevista;
@@ -29,13 +31,18 @@ public abstract class Locacao {
     public Locacao() {
     }
 
-    public String locarVeiculo(){
+    public String locarVeiculo(Veiculo veiculo){
         veiculo.setEstaDisponivel(false);
+        veiculos.add(veiculo);
         return "Locação realizada com sucesso!";
     }
 
-    public String devolverVeiculo() {
-        long dias = ChronoUnit.DAYS.between(dataReserva, dataDevolucaoPrevista);
+    public String devolverVeiculo(Veiculo veiculo) {
+        if (!veiculos.contains(veiculo)) {
+            throw new VeiculoNaoEncontradoException("Veículos não está registrado neste contrato de locação.");
+        }
+        Long dias = calcularDiarias();
+
         BigDecimal valorAluguel = BigDecimal.valueOf(veiculo.getValorDiaria().doubleValue() * dias);
         BigDecimal descontoPercentual = desconto.divide(new BigDecimal("100.00"), RoundingMode.HALF_UP);
         if(dias >= 5) {
@@ -46,6 +53,17 @@ public abstract class Locacao {
                 "Total a pagar: R$" + valorAluguel;
     }
 
+    private Long calcularDiarias(){
+        Long diasTranscorridos = ChronoUnit.DAYS.between(dataReserva, dataDevolucaoPrevista);
+        Long horasTranscorridas = ChronoUnit.HOURS.between(dataReserva,dataDevolucaoPrevista);
+
+        if (horasTranscorridas % 24 != 0){
+            diasTranscorridos++;
+        }
+
+        return diasTranscorridos;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -54,12 +72,12 @@ public abstract class Locacao {
         this.cliente = cliente;
     }
 
-    public Veiculo getVeiculo() {
-        return veiculo;
+    public Set<Veiculo> getVeiculo() {
+        return veiculos;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
+    public void setVeiculo(Set<Veiculo> veiculo) {
+        this.veiculos = veiculo;
     }
 
     public String getLocalDevolucao() {
