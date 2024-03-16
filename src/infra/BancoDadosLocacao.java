@@ -6,20 +6,20 @@ import model.locacao.Locacao;
 import java.util.List;
 import java.util.Map;
 
-public class BandoDadosLocacao implements BancoDadosDeleta<String, Locacao> {
+public class BancoDadosLocacao implements BancoDadosDeleta<String, Locacao> {
     private final Map<String, Locacao> locacoes;
 
-    public BandoDadosLocacao(Map<String, Locacao> locacoes) {
+    public BancoDadosLocacao(Map<String, Locacao> locacoes) {
         this.locacoes = locacoes;
     }
 
     @Override
-    public Boolean salvar(Locacao veiculo) {
+    public Locacao salvar(Locacao veiculo) {
         return null;
     }
 
     @Override
-    public Boolean atualizar(String idLocacao, Locacao locacao) {
+    public Locacao atualizar(String idLocacao, Locacao locacao) {
         return null;
     }
 

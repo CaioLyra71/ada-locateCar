@@ -6,17 +6,17 @@ import model.cliente.Cliente;
 import java.util.List;
 import java.util.Map;
 
-public class BandoDadosCliente implements BancoDados<String, Cliente> {
+public class BancoDadosCliente implements BancoDados<String, Cliente> {
     private Map<String, Cliente> clientes;
 
 
     @Override
-    public Boolean salvar(Cliente cliente) {
+    public Cliente salvar(Cliente cliente) {
         return null;
     }
 
     @Override
-    public Boolean atualizar(String s, Cliente cliente) {
+    public Cliente atualizar(String s, Cliente cliente) {
         return null;
     }
 

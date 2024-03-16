@@ -8,17 +8,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BandoDadosVeiculo implements BancoDadosBuscaNome<String, Veiculo> {
+public class BancoDadosVeiculo implements BancoDadosBuscaNome<String, Veiculo> {
     private final Map<String, Veiculo> veiculos = new HashMap<>();
 
     @Override
-    public Boolean salvar(Veiculo veiculo) {
-        veiculos.put(veiculo.getPlacaVeiculo(), veiculo);
-        return true;
+    public Veiculo salvar(Veiculo veiculo) throws BancoDadosException {
+        Veiculo veiculoASalvar = veiculos.put(veiculo.getPlacaVeiculo(), veiculo);
+        if(veiculoASalvar == null) {
+            throw new BancoDadosException("Falha ao tentar salvar o veículo");
+        }
+        return veiculoASalvar;
     }
 
     @Override
-    public Boolean atualizar(String s, Veiculo veiculo) {
+    public Veiculo atualizar(String s, Veiculo veiculo) {
         return null;
     }
 
