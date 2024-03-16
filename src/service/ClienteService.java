@@ -1,26 +1,24 @@
 package service;
 
 import model.cliente.Cliente;
-import repository.Repository;
+import repository.interfaces.Repositorio;
 
 public class ClienteService {
-    private final Repository<Cliente> clienteRepository;
+    private final Repositorio<String,Cliente> clienteRepository;
 
-    public ClienteService(Repository<Cliente> clienteRepository) {
+    public ClienteService(Repositorio<String,Cliente> clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
 
-    public Boolean salvarCliente(Cliente cliente) {
+    public String salvarCliente(Cliente cliente) {
         return null;
     }
 
-    public Cliente atualizarCliente(Cliente cliente) {
+    public String atualizarCliente(Cliente cliente) {
         return null;
     }
 
     public Cliente buscarClientePorId(String idCliente){
         return null;
     }
-
-    public Boolean deletarCliente(String idCliente) {return null;}
 }

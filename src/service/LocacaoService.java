@@ -1,16 +1,17 @@
 package service;
 
 import model.locacao.Locacao;
-import repository.Repository;
+import repository.interfaces.Repositorio;
+import repository.interfaces.RepositorioDeleta;
 
 public class LocacaoService {
-    private final Repository<Locacao> locacaoRepository;
+    private final RepositorioDeleta<String,Locacao> locacaoRepository;
 
-    public LocacaoService(Repository<Locacao> locacaoRepository) {
+    public LocacaoService(RepositorioDeleta<String,Locacao> locacaoRepository) {
         this.locacaoRepository = locacaoRepository;
     }
 
-    public Boolean salvarLocacao(Locacao locacao) {
+    public String salvarLocacao(Locacao locacao) {
         return null;
     }
 
@@ -18,11 +19,11 @@ public class LocacaoService {
         return null;
     }
 
-    public Locacao atualizarLocacao(Locacao locacao, String idLocacao) {
+    public String atualizarLocacao(Locacao locacao, String idLocacao) {
         return null;
     }
 
-    public Boolean deletarLocacao(String idLocacao) {
+    public String deletarLocacao(String idLocacao) {
         return null;
     }
 }
