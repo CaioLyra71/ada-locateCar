@@ -1,24 +1,29 @@
 package repository;
 
 import model.cliente.Cliente;
+import repository.interfaces.Repositorio;
 
-public class ClienteRepository implements Repository<Cliente> {
+import java.util.List;
+
+public class ClienteRepository implements Repositorio<String, Cliente> {
+
     @Override
-    public Boolean salvar(Cliente cliente) {
+    public Cliente salvar(Cliente cliente) {
         return null;
     }
 
     @Override
-    public Cliente atualizar(java.lang.String id, Cliente cliente) {
+    public Cliente atualizar(String s, Cliente cliente) {
         return null;
     }
 
     @Override
-    public Boolean deletar(String id) {
+    public List<Cliente> listarTodos() {
         return null;
     }
+
     @Override
-    public Cliente buscarPorId(String id) {
+    public Cliente buscarPorId(String s) {
         return null;
     }
 }

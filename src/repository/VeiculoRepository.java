@@ -1,45 +1,47 @@
 package repository;
 
-import infra.BandoDadosVeiculo;
+import infra.BancoDadosVeiculo;
 import infra.exceptions.BancoDadosException;
 import model.veiculo.Veiculo;
 import repository.exceptions.RepositorioException;
+import repository.interfaces.RepositorioBuscaPorNome;
 
 import java.util.List;
 
-public class VeiculoRepository implements BuscaPorNome<Veiculo> {
-    private final BandoDadosVeiculo bandoDadosVeiculo;
+public class VeiculoRepository implements RepositorioBuscaPorNome<String,Veiculo> {
+    private final BancoDadosVeiculo bancoDadosVeiculo;
 
-    public VeiculoRepository(BandoDadosVeiculo bandoDadosVeiculo) {
-        this.bandoDadosVeiculo = bandoDadosVeiculo;
+    public VeiculoRepository(BancoDadosVeiculo bancoDadosVeiculo) {
+        this.bancoDadosVeiculo = bancoDadosVeiculo;
     }
 
-    @Override
-    public Boolean salvar(Veiculo veiculo) {
-        return bandoDadosVeiculo.salvar(veiculo);
-    }
 
     @Override
-    public List<Veiculo> buscarPorNome(String nomeVeiculo) throws RepositorioException {
+    public Veiculo salvar(Veiculo veiculo) throws RepositorioException {
         try {
-            return bandoDadosVeiculo.buscarPorNome(nomeVeiculo);
+            return bancoDadosVeiculo.salvar(veiculo);
         } catch (BancoDadosException e) {
-            throw new RepositorioException("O veículo não foi encotrado",e);
+            throw new RepositorioException(e.getMessage(), e);
         }
     }
 
     @Override
-    public Veiculo buscarPorId(String id) {
+    public Veiculo atualizar(String s, Veiculo veiculo) {
         return null;
     }
 
     @Override
-    public Veiculo atualizar(String id, Veiculo veiculo) {
+    public List<Veiculo> listarTodos() {
         return null;
     }
 
     @Override
-    public Boolean deletar(String id) {
+    public Veiculo buscarPorId(String s) {
+        return null;
+    }
+
+    @Override
+    public List<Veiculo> buscarPorNome(String nome) {
         return null;
     }
 }
