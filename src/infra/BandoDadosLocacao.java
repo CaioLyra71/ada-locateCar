@@ -3,6 +3,7 @@ package infra;
 import infra.interfaces.BancoDadosDeleta;
 import model.locacao.Locacao;
 
+import java.util.List;
 import java.util.Map;
 
 public class BandoDadosLocacao implements BancoDadosDeleta<String, Locacao> {
@@ -19,6 +20,16 @@ public class BandoDadosLocacao implements BancoDadosDeleta<String, Locacao> {
 
     @Override
     public Boolean atualizar(String idLocacao, Locacao locacao) {
+        return null;
+    }
+
+    @Override
+    public List<Locacao> listarTodos() {
+        return null;
+    }
+
+    @Override
+    public Locacao buscarPorId(String s) {
         return null;
     }
 

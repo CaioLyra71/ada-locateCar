@@ -23,6 +23,16 @@ public class BandoDadosVeiculo implements BancoDadosBuscaNome<String, Veiculo> {
     }
 
     @Override
+    public List<Veiculo> listarTodos() {
+        return null;
+    }
+
+    @Override
+    public Veiculo buscarPorId(String s) {
+        return null;
+    }
+
+    @Override
     public List<Veiculo> buscarPorNome(String nomeVeiculo) throws BancoDadosException {
         //lógica para buscar por nome
         throw new BancoDadosException("Veículo não foi encontrado");
