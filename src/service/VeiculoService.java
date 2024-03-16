@@ -1,7 +1,7 @@
 package service;
 
 import model.veiculo.Veiculo;
-import repository.BuscaPorNome;
+import repository.interfaces.RepositorioBuscaPorNome;
 import repository.exceptions.RepositorioException;
 import service.exceptions.ModeloException;
 import service.exceptions.ServicoException;
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class VeiculoService {
 
-    private final BuscaPorNome<Veiculo> veiculoRepository;
+    private final RepositorioBuscaPorNome<String, Veiculo> veiculoRepository;
 
-    public VeiculoService(BuscaPorNome<Veiculo> veiculoRepository) {
+    public VeiculoService(RepositorioBuscaPorNome<String,Veiculo> veiculoRepository) {
         this.veiculoRepository = veiculoRepository;
     }
 
-    public Boolean salvarVeiculo(Veiculo veiculo){
+    public String salvarVeiculo(Veiculo veiculo) throws ServicoException {
         if (veiculo.getNomeVeiculo() == null || veiculo.getNomeVeiculo().trim().isEmpty()) {
             throw new ModeloException("Nome inválido");
         }
@@ -24,7 +24,12 @@ public class VeiculoService {
             throw new ModeloException("Placa inválida");
         }
 
-        return veiculoRepository.salvar(veiculo);
+        try {
+            veiculoRepository.salvar(veiculo);
+            return "Veículo salvo com sucesso";
+        } catch (RepositorioException e) {
+            throw new ServicoException(e.getMessage(), e);
+        }
     }
 
     public List<Veiculo> buscarVeiculoPorNome(String nomeVeiculo) throws Exception {
@@ -41,11 +46,11 @@ public class VeiculoService {
         return veiculosEncontrados;
     }
 
-    public Veiculo atualizarVeiculo(Veiculo veiculo, String idVeiculo){
+    public Veiculo buscarVeiculoPorId(String idCliente) {
         return null;
     }
 
-    public Boolean deletarVeiculo(String idVeiculo){
+    public String atualizarVeiculo(Veiculo veiculo, String idVeiculo){
         return null;
     }
 }
