@@ -1,31 +1,29 @@
 package infra;
 
-import infra.interfaces.BancoDados;
 import infra.interfaces.BancoDadosDeleta;
-import model.cliente.Cliente;
-import model.veiculo.Veiculo;
+import model.locacao.Locacao;
 
 import java.util.Map;
 
-public class BandoDadosLocacao implements BancoDadosDeleta<Cliente, Veiculo> {
-    private Map<Cliente, Veiculo> locacao;
+public class BandoDadosLocacao implements BancoDadosDeleta<String, Locacao> {
+    private final Map<String, Locacao> locacoes;
 
-    public BandoDadosLocacao(Map<Cliente, Veiculo> locacao) {
-        this.locacao = locacao;
+    public BandoDadosLocacao(Map<String, Locacao> locacoes) {
+        this.locacoes = locacoes;
     }
 
     @Override
-    public Boolean salvar(Veiculo veiculo) {
+    public Boolean salvar(Locacao veiculo) {
         return null;
     }
 
     @Override
-    public Boolean atualizar(Cliente cliente, Veiculo veiculo) {
+    public Boolean atualizar(String idLocacao, Locacao locacao) {
         return null;
     }
 
     @Override
-    public Boolean deletar(Cliente cliente) {
+    public Boolean deletar(String idLocacao) {
         return null;
     }
 }
