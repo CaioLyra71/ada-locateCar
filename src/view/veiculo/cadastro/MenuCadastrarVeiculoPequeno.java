@@ -19,7 +19,7 @@ public class MenuCadastrarVeiculoPequeno {
         this.scanner.nextLine();
         System.out.print("Informe o nome do veículo: ");
         String nomeVeiculo = this.scanner.nextLine();
-        System.out.println("Informe a placa do veículo: ");
+        System.out.print("Informe a placa do veículo: ");
         String placaVeiculo = this.scanner.nextLine();
 
         Veiculo veiculoPequeno = new VeiculoPequeno(nomeVeiculo, placaVeiculo);

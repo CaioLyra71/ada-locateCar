@@ -25,9 +25,7 @@ public class MenuCadastrarVeiculo extends MenuAbstrato {
             case 1 -> new MenuCadastrarVeiculoPequeno(new VeiculoService(new VeiculoRepository(new BandoDadosVeiculo())), this.scanner).executar();
             case 2 -> System.out.println("medio");
             case 3 -> System.out.println("suv");
-            case 0 -> executar();
             default -> System.out.println("Opcão inválida");
         }
-        executar();
     }
 }
