@@ -3,6 +3,7 @@ package view.veiculo.cadastro;
 import model.veiculo.Veiculo;
 import model.veiculo.VeiculoPequeno;
 import service.VeiculoService;
+import service.exceptions.ServicoException;
 
 import java.util.Scanner;
 
@@ -24,9 +25,10 @@ public class MenuCadastrarVeiculoPequeno {
 
         Veiculo veiculoPequeno = new VeiculoPequeno(nomeVeiculo, placaVeiculo);
 
-        Boolean salvou = veiculoService.salvarVeiculo(veiculoPequeno);
-        if (salvou) {
-            System.out.println("Veículo salvo com sucesso!");
+        try {
+            System.out.println(veiculoService.salvarVeiculo(veiculoPequeno));
+        } catch (ServicoException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
