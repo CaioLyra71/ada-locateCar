@@ -1,7 +1,6 @@
 package view.veiculo.cadastro;
 
-import infra.BandoDadosVeiculo;
-import model.veiculo.Veiculo;
+import infra.BancoDadosVeiculo;
 import repository.VeiculoRepository;
 import service.VeiculoService;
 import view.components.menu.ItemMenu;
@@ -22,7 +21,7 @@ public class MenuCadastrarVeiculo extends MenuAbstrato {
     @Override
     protected void executarOpcao(Integer opcao) {
         switch (opcao) {
-            case 1 -> new MenuCadastrarVeiculoPequeno(new VeiculoService(new VeiculoRepository(new BandoDadosVeiculo())), this.scanner).executar();
+            case 1 -> new MenuCadastrarVeiculoPequeno(new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo())), this.scanner).executar();
             case 2 -> System.out.println("medio");
             case 3 -> System.out.println("suv");
             default -> System.out.println("Opcão inválida");
