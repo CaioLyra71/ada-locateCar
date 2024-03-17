@@ -8,5 +8,5 @@ public interface Repositorio<K, V>{
     V salvar(V v) throws RepositorioException;
     V atualizar(K k, V v);
     List<V> listarTodos();
-    V buscarPorId(K k);
+    V buscarPorId(K k) throws RepositorioException;
 }
