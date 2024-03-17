@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 public class LocacaoPessoaJuridica extends Locacao{
-    public LocacaoPessoaJuridica(Cliente cliente, Set<Veiculo> veiculos, String localDevolucao, LocalDateTime dataReserva, LocalDateTime dataDevolucaoPrevista, BigDecimal desconto) {
-        super(cliente, veiculos, localDevolucao, dataReserva, dataDevolucaoPrevista, desconto);
+    public LocacaoPessoaJuridica(Cliente cliente, Veiculo veiculo, String localDevolucao, LocalDateTime dataReserva, LocalDateTime dataDevolucaoPrevista, BigDecimal desconto) {
+        super(cliente, veiculo, localDevolucao, dataReserva, dataDevolucaoPrevista, desconto);
     }
 
     public LocacaoPessoaJuridica() {

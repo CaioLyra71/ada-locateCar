@@ -9,16 +9,16 @@ import java.util.Set;
 
 public abstract class Locacao {
     private Cliente cliente;
-    private Set<Veiculo> veiculos;
+    private Veiculo veiculo;
     private String localDevolucao;
     private LocalDateTime dataReserva;
     private LocalDateTime dataDevolucaoPrevista;
     private BigDecimal desconto;
 
 
-    public Locacao(Cliente cliente, Set<Veiculo> veiculos, String localDevolucao, LocalDateTime dataReserva, LocalDateTime dataDevolucaoPrevista, BigDecimal desconto) {
+    public Locacao(Cliente cliente, Veiculo veiculo, String localDevolucao, LocalDateTime dataReserva, LocalDateTime dataDevolucaoPrevista, BigDecimal desconto) {
         this.cliente = cliente;
-        this.veiculos = veiculos;
+        this.veiculo = veiculo;
         this.localDevolucao = localDevolucao;
         this.dataReserva = dataReserva;
         this.dataDevolucaoPrevista = dataDevolucaoPrevista;
@@ -36,12 +36,12 @@ public abstract class Locacao {
         this.cliente = cliente;
     }
 
-    public Set<Veiculo> getVeiculos() {
-        return veiculos;
+    public Veiculo getVeiculos() {
+        return veiculo;
     }
 
-    public void setVeiculo(Set<Veiculo> veiculo) {
-        this.veiculos = veiculo;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public String getLocalDevolucao() {
