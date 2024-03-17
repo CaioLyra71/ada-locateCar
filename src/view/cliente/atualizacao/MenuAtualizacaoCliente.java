@@ -1,8 +1,10 @@
 package view.cliente.atualizacao;
 
 import infra.BancoDadosPessoaFisica;
+import infra.BancoDadosPessoaJuridica;
 import repository.ClienteRepository;
 import service.PessoaFisicaService;
+import service.PessoaJuridicaService;
 import view.components.menu.ItemMenu;
 import view.components.menu.MenuAbstrato;
 
@@ -21,6 +23,9 @@ public class MenuAtualizacaoCliente extends MenuAbstrato {
         switch (opcao) {
             case 1 -> new MenuAtualizacaoPessoaFisica(scanner,
                     new PessoaFisicaService(new ClienteRepository<>(new BancoDadosPessoaFisica())))
+                    .executar();
+            case 2 -> new MenuAtualizacaoPessoaJuridica(scanner,
+                    new PessoaJuridicaService(new ClienteRepository<>(new BancoDadosPessoaJuridica())))
                     .executar();
             default -> System.out.println("Opção inválida");
         }
