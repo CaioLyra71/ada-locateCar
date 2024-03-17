@@ -11,8 +11,7 @@ public class MenuVeiculo extends MenuAbstrato {
         super(new ItemMenu[] {
                 new ItemMenu(1, "Cadastrar"),
                 new ItemMenu(2, "Atualizar"),
-                new ItemMenu(3, "Buscar veículo por nome"),
-                new ItemMenu(0, "Voltar"),
+                new ItemMenu(3, "Buscar veículo por nome")
         }, scanner);
     }
 
