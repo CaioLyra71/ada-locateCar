@@ -20,7 +20,7 @@ public class MenuLocacao extends MenuAbstrato {
     protected void executarOpcao(Integer opcao) {
         switch (opcao) {
             case 1 -> new MenuLocacaoCadastro(scanner).executar();
-            case 2 -> System.out.println("atualizar");
+            case 2 -> System.out.println("Ainda não implementado. Virá em novas versões.");
             case 3 -> new MenuLocacaoDevolucao(scanner).executar();
             default -> System.out.println("Opção Inválida");
         }
