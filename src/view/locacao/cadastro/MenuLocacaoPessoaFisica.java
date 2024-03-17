@@ -13,9 +13,7 @@ import view.locacao.util.MenuEscolhaVeiculos;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class MenuLocacaoPessoaFisica {
     private final Scanner scanner;
