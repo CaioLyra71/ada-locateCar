@@ -49,7 +49,8 @@ public class BancoDadosVeiculo implements BancoDadosBuscaNome<String, Veiculo> {
         List<Veiculo> todosVeiculos = listarTodos();
         List<Veiculo> veiculosEncontrados = new ArrayList<>();
         for (Veiculo veiculo : todosVeiculos) {
-            if (veiculo.getNomeVeiculo().toLowerCase().contains(nomeVeiculo.toLowerCase())) {
+            if (veiculo.getNomeVeiculo().toLowerCase().contains(nomeVeiculo.toLowerCase())
+            && veiculo.getEstaDisponivel()) {
                 veiculosEncontrados.add(veiculo);
             }
         }
