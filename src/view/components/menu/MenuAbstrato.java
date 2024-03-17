@@ -22,7 +22,9 @@ public abstract class MenuAbstrato {
             System.out.println();
             executarOpcao(opcao);
         } catch (Exception e) {
+            scanner.nextLine();
             System.err.println("Entrada inválida");
+            System.out.println();
             executar();
         }
     }
