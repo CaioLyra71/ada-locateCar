@@ -68,7 +68,14 @@ public class VeiculoService {
     }
 
     public String atualizarVeiculo(Veiculo veiculo, String idVeiculo){
-        return null;
+        try{
+            validarNomeVeiculo(veiculo.getNomeVeiculo());
+            validarPlaca(veiculo.getPlacaVeiculo());
+            veiculoRepository.atualizar(idVeiculo, veiculo);
+            return "Veículo atualizado com sucesso";
+        } catch (ModeloException e) {
+            throw new ModeloException(e.getMessage());
+        }
     }
 
     public List<Veiculo> listarTodos() {
