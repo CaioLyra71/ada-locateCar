@@ -57,6 +57,8 @@ public class PessoaFisicaService {
         try {
             validarCpf(idCliente);
             return clienteRepository.buscarPorId(idCliente);
+        } catch (ModeloException e) {
+            throw new ModeloException(e.getMessage());
         } catch (RepositorioException e) {
             throw new ServicoException(e.getMessage(), e);
         }
