@@ -15,7 +15,6 @@ public class VeiculoRepository implements RepositorioBuscaPorNome<String,Veiculo
         this.bancoDadosVeiculo = bancoDadosVeiculo;
     }
 
-
     @Override
     public Veiculo salvar(Veiculo veiculo) throws RepositorioException {
         try {
@@ -26,22 +25,26 @@ public class VeiculoRepository implements RepositorioBuscaPorNome<String,Veiculo
     }
 
     @Override
-    public Veiculo atualizar(String s, Veiculo veiculo) {
-        return null;
+    public Veiculo atualizar(String idVeiculo, Veiculo veiculo) {
+        return bancoDadosVeiculo.atualizar(idVeiculo, veiculo);
     }
 
     @Override
     public List<Veiculo> listarTodos() {
-        return null;
+        return bancoDadosVeiculo.listarTodos();
     }
 
     @Override
-    public Veiculo buscarPorId(String s) {
-        return null;
+    public Veiculo buscarPorId(String idVeiculo) throws RepositorioException {
+        Veiculo veiculo = bancoDadosVeiculo.buscarPorId(idVeiculo);
+        if (veiculo == null) {
+            throw new RepositorioException("Veículo não existe.");
+        }
+        return veiculo;
     }
 
     @Override
     public List<Veiculo> buscarPorNome(String nome) {
-        return null;
+        return bancoDadosVeiculo.buscarPorNome(nome);
     }
 }
