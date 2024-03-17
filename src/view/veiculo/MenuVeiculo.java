@@ -1,5 +1,8 @@
 package view.veiculo;
 
+import infra.BancoDadosVeiculo;
+import repository.VeiculoRepository;
+import service.VeiculoService;
 import view.components.menu.ItemMenu;
 import view.components.menu.MenuAbstrato;
 import view.veiculo.cadastro.MenuCadastrarVeiculo;
@@ -20,7 +23,9 @@ public class MenuVeiculo extends MenuAbstrato {
         switch (opcao) {
             case 1 -> new MenuCadastrarVeiculo(this.scanner).executar();
             case 2 -> System.out.println("atualizar");
-            case 3 -> System.out.println("buscar por nome");
+            case 3 -> new MenuBuscarVeiculoPorNome(this.scanner,
+                    new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo())))
+                    .executar();
             default -> System.out.println("Opção inválida");
         }
     }
