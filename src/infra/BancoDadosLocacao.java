@@ -1,40 +1,52 @@
 package infra;
 
+import infra.exceptions.BancoDadosException;
 import infra.interfaces.BancoDadosDeleta;
+import model.cliente.Cliente;
 import model.locacao.Locacao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BancoDadosLocacao implements BancoDadosDeleta<String, Locacao> {
-    private final Map<String, Locacao> locacoes;
+public class BancoDadosLocacao implements BancoDadosDeleta<Cliente, Locacao> {
+    private final static Map<Cliente, Locacao> locacoes = new HashMap<>();
 
-    public BancoDadosLocacao(Map<String, Locacao> locacoes) {
-        this.locacoes = locacoes;
+    @Override
+    public Locacao salvar(Locacao locacao) throws BancoDadosException {
+        Locacao locacaoExistente = buscarPorId(locacao.getCliente());
+        if (locacaoExistente != null){
+            throw new BancoDadosException("Este registro já existe");
+        }
+        return locacoes.put(locacao.getCliente(), locacao);
     }
 
     @Override
-    public Locacao salvar(Locacao veiculo) {
-        return null;
-    }
-
-    @Override
-    public Locacao atualizar(String idLocacao, Locacao locacao) {
-        return null;
+    public Locacao atualizar(Cliente idLocacao, Locacao locacao) {
+        if(!idLocacao.equals(locacao.getCliente())) {
+            deletar(idLocacao);
+        }
+        return locacoes.put(locacao.getCliente(), locacao);
     }
 
     @Override
     public List<Locacao> listarTodos() {
-        return null;
+        List<Locacao> registros = new ArrayList<>();
+        var entries = locacoes.entrySet();
+        for (var entry : entries){
+            registros.add(entry.getValue());
+        }
+        return registros;
     }
 
     @Override
-    public Locacao buscarPorId(String s) {
-        return null;
+    public Locacao buscarPorId(Cliente cliente) {
+        return locacoes.get(cliente);
     }
 
     @Override
-    public Boolean deletar(String idLocacao) {
-        return null;
+    public Locacao deletar(Cliente idLocacao) {
+        return locacoes.remove(idLocacao);
     }
 }
