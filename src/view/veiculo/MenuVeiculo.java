@@ -22,7 +22,7 @@ public class MenuVeiculo extends MenuAbstrato {
     protected void executarOpcao(Integer opcao) {
         switch (opcao) {
             case 1 -> new MenuCadastrarVeiculo(this.scanner).executar();
-            case 2 -> System.out.println("atualizar");
+            case 2 -> new MenuAtualizarVeiculo(this.scanner, new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo()))).executar();
             case 3 -> new MenuBuscarVeiculoPorNome(this.scanner,
                     new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo())))
                     .executar();
