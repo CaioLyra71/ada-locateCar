@@ -5,7 +5,6 @@ import model.veiculo.Veiculo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 public abstract class Locacao {
     private Cliente cliente;
@@ -36,7 +35,7 @@ public abstract class Locacao {
         this.cliente = cliente;
     }
 
-    public Veiculo getVeiculos() {
+    public Veiculo getVeiculo() {
         return veiculo;
     }
 
