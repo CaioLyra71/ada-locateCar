@@ -1,5 +1,6 @@
 package view;
 
+import view.cliente.MenuCliente;
 import view.components.menu.ItemMenu;
 import view.components.menu.MenuAbstrato;
 import view.veiculo.MenuVeiculo;
@@ -21,7 +22,7 @@ public class Menu extends MenuAbstrato {
     protected void executarOpcao(Integer opcao) {
         switch (opcao){
             case 1 -> System.out.println("menu locação");
-            case 2 -> System.out.println("menu cliente");
+            case 2 -> new MenuCliente(this.scanner).executar();
             case 3 -> new MenuVeiculo(this.scanner).executar();
             case 0 -> System.exit(1);
             default -> System.out.println("Opção inválida");
