@@ -22,8 +22,8 @@ public class MenuCadastrarVeiculo extends MenuAbstrato {
     protected void executarOpcao(Integer opcao) {
         switch (opcao) {
             case 1 -> new MenuCadastrarVeiculoPequeno(new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo())), this.scanner).executar();
-            case 2 -> System.out.println("medio");
-            case 3 -> System.out.println("suv");
+            case 2 -> new MenuCadastrarVeiculoMedio(new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo())), this.scanner).executar();
+            case 3 -> new MenuCadastrarVeiculoSUV(new VeiculoService(new VeiculoRepository(new BancoDadosVeiculo())), this.scanner).executar();
             default -> System.out.println("Opcão inválida");
         }
     }
