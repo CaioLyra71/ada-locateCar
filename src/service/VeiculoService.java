@@ -6,6 +6,7 @@ import repository.exceptions.RepositorioException;
 import service.exceptions.ModeloException;
 import service.exceptions.ServicoException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VeiculoService {
@@ -16,41 +17,69 @@ public class VeiculoService {
         this.veiculoRepository = veiculoRepository;
     }
 
-    public String salvarVeiculo(Veiculo veiculo) throws ServicoException {
-        if (veiculo.getNomeVeiculo() == null || veiculo.getNomeVeiculo().trim().isEmpty()) {
+    private void validarNomeVeiculo(String nomeVeiculo) {
+        if (nomeVeiculo == null || nomeVeiculo.trim().isEmpty()) {
             throw new ModeloException("Nome inválido");
         }
-        if(veiculo.getPlacaVeiculo() == null || veiculo.getPlacaVeiculo().trim().isEmpty()){
-            throw new ModeloException("Placa inválida");
-        }
+    }
 
+    private void validarPlaca(String placaVeiculo) {
+        if (placaVeiculo == null || placaVeiculo.trim().isEmpty()) {
+            throw new ModeloException("Placa inválida.");
+        }
+    }
+
+    public String salvarVeiculo(Veiculo veiculo) throws ServicoException {
         try {
+            validarNomeVeiculo(veiculo.getNomeVeiculo());
+            validarPlaca(veiculo.getPlacaVeiculo());
             veiculoRepository.salvar(veiculo);
             return "Veículo salvo com sucesso";
+        } catch (ModeloException e) {
+            throw new ModeloException(e.getMessage());
         } catch (RepositorioException e) {
             throw new ServicoException(e.getMessage(), e);
         }
     }
 
-    public List<Veiculo> buscarVeiculoPorNome(String nomeVeiculo) throws Exception {
+    public List<Veiculo> buscarVeiculoPorNome(String nomeVeiculo) throws ServicoException {
         List<Veiculo> veiculosEncontrados;
-        if(nomeVeiculo == null || nomeVeiculo.trim().isEmpty()) {
-            throw new Exception("O nome do veículo não pode ser vazio");
-        }
-        // mais validações
         try {
+            validarNomeVeiculo(nomeVeiculo);
             veiculosEncontrados = veiculoRepository.buscarPorNome(nomeVeiculo);
-        } catch (RepositorioException e) {
+            return veiculosEncontrados;
+        } catch (ModeloException e) {
+            throw new ModeloException(e.getMessage());
+        }  catch (RepositorioException e) {
             throw new ServicoException("O veículo não foi encontrado.", e);
         }
-        return veiculosEncontrados;
     }
 
-    public Veiculo buscarVeiculoPorId(String idCliente) {
-        return null;
+    public Veiculo buscarVeiculoPorId(String idCliente) throws ServicoException {
+        try {
+            validarPlaca(idCliente);
+            return veiculoRepository.buscarPorId(idCliente);
+        } catch (RepositorioException e) {
+            throw new ServicoException(e.getMessage(), e);
+        }
     }
 
     public String atualizarVeiculo(Veiculo veiculo, String idVeiculo){
         return null;
+    }
+
+    public List<Veiculo> listarTodos() {
+        return veiculoRepository.listarTodos();
+    }
+
+    public List<Veiculo> listarVeiculosDisponiveis() {
+        var todosVeiculos = listarTodos();
+        List<Veiculo> veiculosDisponiveis = new ArrayList<>();
+        for (Veiculo veiculo : todosVeiculos){
+            if (veiculo.getEstaDisponivel()) {
+                veiculosDisponiveis.add(veiculo);
+            }
+        }
+        return veiculosDisponiveis;
     }
 }
