@@ -3,6 +3,7 @@ package view.locacao;
 import view.components.menu.ItemMenu;
 import view.components.menu.MenuAbstrato;
 import view.locacao.cadastro.MenuLocacaoCadastro;
+import view.locacao.devolucao.MenuLocacaoDevolucao;
 
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class MenuLocacao extends MenuAbstrato {
         switch (opcao) {
             case 1 -> new MenuLocacaoCadastro(scanner).executar();
             case 2 -> System.out.println("atualizar");
-            case 3 -> System.out.println("devolver");
+            case 3 -> new MenuLocacaoDevolucao(scanner).executar();
             default -> System.out.println("Opção Inválida");
         }
     }
