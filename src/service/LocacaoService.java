@@ -4,6 +4,7 @@ import model.cliente.Cliente;
 import model.exceptions.VeiculoNaoEncontradoException;
 import model.locacao.Locacao;
 import model.veiculo.Veiculo;
+import repository.exceptions.RepositorioException;
 import repository.interfaces.RepositorioDeleta;
 import service.exceptions.ModeloException;
 
@@ -13,9 +14,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class LocacaoService {
-    private final RepositorioDeleta<String,Locacao> locacaoRepository;
+    private final RepositorioDeleta<Cliente,Locacao> locacaoRepository;
 
-    public LocacaoService(RepositorioDeleta<String,Locacao> locacaoRepository) {
+    public LocacaoService(RepositorioDeleta<Cliente,Locacao> locacaoRepository) {
         this.locacaoRepository = locacaoRepository;
     }
 
@@ -49,31 +50,25 @@ public class LocacaoService {
         }
     }
 
-    private String locarVeiculo(Locacao locacao, Veiculo veiculo){
-        veiculo.setEstaDisponivel(false);
-        locacao.getVeiculos().add(veiculo);
-        return "Locação realizada com sucesso!";
-    }
+//    public String devolverVeiculo(Locacao locacao, Veiculo veiculo) {
+//        if (!locacao.getVeiculos().equals(veiculo)) {
+//            throw new VeiculoNaoEncontradoException("Veículo não está registrado neste contrato de locação.");
+//        }
+//        Long dias = calcularDiarias(locacao);
+//
+//        BigDecimal valorAluguel = BigDecimal.valueOf(veiculo.getValorDiaria().doubleValue() * dias);
+//        BigDecimal descontoPercentual = locacao.getDesconto().divide(new BigDecimal("100.00"), RoundingMode.HALF_UP);
+//        if(dias >= 5) {
+//            valorAluguel = valorAluguel.multiply(descontoPercentual);
+//        }
+//        veiculo.setEstaDisponivel(true);
+//        return "Veículo devolvido com sucesso\n" +
+//                "Total a pagar: R$" + valorAluguel;
+//    }
 
-    private String devolverVeiculo(Locacao locacao, Veiculo veiculo) {
-        if (!locacao.getVeiculos().contains(veiculo)) {
-            throw new VeiculoNaoEncontradoException("Veículos não está registrado neste contrato de locação.");
-        }
-        Long dias = calcularDiarias(locacao);
-
-        BigDecimal valorAluguel = BigDecimal.valueOf(veiculo.getValorDiaria().doubleValue() * dias);
-        BigDecimal descontoPercentual = locacao.getDesconto().divide(new BigDecimal("100.00"), RoundingMode.HALF_UP);
-        if(dias >= 5) {
-            valorAluguel = valorAluguel.multiply(descontoPercentual);
-        }
-        veiculo.setEstaDisponivel(true);
-        return "Veículo devolvido com sucesso\n" +
-                "Total a pagar: R$" + valorAluguel;
-    }
-
-    private Long calcularDiarias(Locacao locacao){
-        Long diasTranscorridos = ChronoUnit.DAYS.between(locacao.getDataReserva(), locacao.getDataDevolucaoPrevista());
-        Long horasTranscorridas = ChronoUnit.HOURS.between(locacao.getDataReserva(), locacao.getDataDevolucaoPrevista());
+    private Long calcularDiarias(Locacao locacao, LocalDateTime dataDevolucao){
+        Long diasTranscorridos = ChronoUnit.DAYS.between(locacao.getDataReserva(), dataDevolucao);
+        Long horasTranscorridas = ChronoUnit.HOURS.between(locacao.getDataReserva(), dataDevolucao);
 
         if (horasTranscorridas % 24 != 0){
             diasTranscorridos++;
@@ -84,7 +79,19 @@ public class LocacaoService {
 
 
     public String salvarLocacao(Locacao locacao) {
-        return null;
+        try{
+            validarCliente(locacao.getCliente());
+            validarVeiculo(locacao.getVeiculos());
+            validarLocalDevolucao(locacao.getLocalDevolucao());
+            validarDataReserva(locacao.getDataReserva());
+            validarDataDevolucao(locacao.getDataDevolucaoPrevista());
+            locacaoRepository.salvar(locacao);
+            return "Locação realizada com sucesso";
+        } catch (ModeloException e) {
+            throw new ModeloException(e.getMessage());
+        } catch (RepositorioException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Locacao buscarLocacaoPorId(String idLocacao) {
