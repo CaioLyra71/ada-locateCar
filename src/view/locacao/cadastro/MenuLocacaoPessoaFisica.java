@@ -42,9 +42,8 @@ public class MenuLocacaoPessoaFisica {
         try {
             var clienteDesejado = clienteService.buscarClientePorId(cpfCliente);
 
-            Set<Veiculo> veiculosDesejados = new HashSet<>();
-            var escolhaVeiculos = new MenuEscolhaVeiculos(scanner, veiculosDesejados, veiculoService);
-            escolhaVeiculos.executar();
+            var escolhaVeiculos = new MenuEscolhaVeiculos(scanner, veiculoService);
+            Veiculo veiculoDesejado = escolhaVeiculos.executar();
 
             System.out.print("Informe o local de devolução: ");
             String localDevolucao = scanner.nextLine();
@@ -55,9 +54,9 @@ public class MenuLocacaoPessoaFisica {
             LocalDateTime dataReserva = LocalDateTime.now();
             LocalDateTime dataDevolucaoPrevista = dataReserva.plusDays(diarias);
 
-            Locacao novaLocacao = new LocacaoPessoaFisica(clienteDesejado, veiculosDesejados, localDevolucao, dataReserva, dataDevolucaoPrevista, new BigDecimal("5.00"));
+            Locacao novaLocacao = new LocacaoPessoaFisica(clienteDesejado, veiculoDesejado, localDevolucao, dataReserva, dataDevolucaoPrevista, new BigDecimal("5.00"));
 
-            locacaoService.salvarLocacao(novaLocacao);
+            System.out.println(locacaoService.salvarLocacao(novaLocacao));
 
         } catch (ServicoException | ModeloException e) {
             System.err.println(e.getMessage());
