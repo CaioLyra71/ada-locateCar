@@ -1,6 +1,5 @@
 package view.cliente.atualizacao;
 
-import model.cliente.ClientePessoaFisica;
 import service.PessoaJuridicaService;
 import service.exceptions.ModeloException;
 import service.exceptions.ServicoException;
@@ -13,7 +12,7 @@ public class MenuAtualizacaoPessoaJuridica {
     private final PessoaJuridicaService pessoaJuridicaService;
     private final MostrarTodosPessoaJuridica todosPessoaJuridica;
 
-    public MenuAtualizacaoPessoaJuridica(Scanner scanner, PessoaJuridicaService pessoaJuridicaService, MostrarTodosPessoaJuridica todosPessoaJuridica) {
+    public MenuAtualizacaoPessoaJuridica(Scanner scanner, PessoaJuridicaService pessoaJuridicaService) {
         this.scanner = scanner;
         this.pessoaJuridicaService = pessoaJuridicaService;
         this.todosPessoaJuridica = new MostrarTodosPessoaJuridica(new String[]{"Nome", "CNPJ"}, pessoaJuridicaService.listarTodos());

@@ -3,7 +3,6 @@ package view.cliente.cadastro;
 import model.cliente.ClientePessoaJuridica;
 import service.PessoaJuridicaService;
 import service.exceptions.ServicoException;
-import view.cliente.util.MostrarTodosPessoaFisica;
 import view.cliente.util.MostrarTodosPessoaJuridica;
 
 import java.util.Scanner;
