@@ -23,6 +23,7 @@ public abstract class MenuAbstrato {
             executarOpcao(opcao);
         } catch (Exception e) {
             System.err.println("Entrada inválida");
+            executar();
         }
     }
 
