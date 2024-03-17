@@ -1,5 +1,7 @@
 package repository.interfaces;
 
+import model.locacao.Locacao;
+
 public interface RepositorioDeleta <K, V> extends Repositorio<K, V> {
-    String deletar(K k);
+    Locacao deletar(K k);
 }

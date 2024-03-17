@@ -1,35 +1,47 @@
 package repository;
 
+import infra.exceptions.BancoDadosException;
+import infra.interfaces.BancoDadosDeleta;
+import model.cliente.Cliente;
 import model.locacao.Locacao;
-import repository.interfaces.Repositorio;
+import repository.exceptions.RepositorioException;
 import repository.interfaces.RepositorioDeleta;
 
 import java.util.List;
 
-public class LocacaoRepository implements RepositorioDeleta<String, Locacao> {
+public class LocacaoRepository implements RepositorioDeleta<Cliente, Locacao> {
+    private final BancoDadosDeleta<Cliente, Locacao> locacaoBancoDados;
 
-    @Override
-    public Locacao salvar(Locacao locacao) {
-        return null;
+    public LocacaoRepository(BancoDadosDeleta<Cliente, Locacao> locacaoBancoDados) {
+        this.locacaoBancoDados = locacaoBancoDados;
     }
 
     @Override
-    public Locacao atualizar(String s, Locacao locacao) {
-        return null;
+    public Locacao salvar(Locacao locacao) throws RepositorioException {
+        try {
+            return locacaoBancoDados.salvar(locacao);
+        } catch (BancoDadosException e) {
+            throw new RepositorioException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public Locacao atualizar(Cliente idLocacao, Locacao locacao) {
+        return locacaoBancoDados.atualizar(idLocacao, locacao);
     }
 
     @Override
     public List<Locacao> listarTodos() {
-        return null;
+        return locacaoBancoDados.listarTodos();
     }
 
     @Override
-    public Locacao buscarPorId(String s) {
-        return null;
+    public Locacao buscarPorId(Cliente idLocacao) {
+        return locacaoBancoDados.buscarPorId(idLocacao);
     }
 
     @Override
-    public String deletar(String s) {
-        return null;
+    public Locacao deletar(Cliente idLocacao) {
+        return locacaoBancoDados.deletar(idLocacao);
     }
 }
