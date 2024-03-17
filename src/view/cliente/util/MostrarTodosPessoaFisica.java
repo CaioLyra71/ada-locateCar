@@ -6,9 +6,9 @@ import view.components.tabela.TabelaView;
 import java.util.List;
 
 public class MostrarTodosPessoaFisica {
-    private String[] cabecalhos;
-    private String[][] linhas;
-    private List<ClientePessoaFisica> clientes;
+    private final String[] cabecalhos;
+    private final String[][] linhas;
+    private final List<ClientePessoaFisica> clientes;
 
     public MostrarTodosPessoaFisica(String[] cabecalhos, List<ClientePessoaFisica> clientes) {
         this.cabecalhos = cabecalhos;
