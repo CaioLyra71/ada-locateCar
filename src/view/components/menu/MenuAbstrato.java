@@ -17,9 +17,13 @@ public abstract class MenuAbstrato {
             System.out.println(itemMenu.getCodigo() + " - " + itemMenu.getTexto());
         }
         System.out.print("Informe o número da opção: ");
-        Integer opcao = scanner.nextInt();
-        System.out.println();
-        executarOpcao(opcao);
+        try {
+            Integer opcao = scanner.nextInt();
+            System.out.println();
+            executarOpcao(opcao);
+        } catch (Exception e) {
+            System.err.println("Entrada inválida");
+        }
     }
 
     protected abstract void executarOpcao(Integer opcao);
