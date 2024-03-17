@@ -27,6 +27,9 @@ public class VeiculoService {
         if (placaVeiculo == null || placaVeiculo.trim().isEmpty()) {
             throw new ModeloException("Placa inválida.");
         }
+        if (!placaVeiculo.matches("[A-Z]{3}-[0-9]{4}")){
+            throw new ModeloException("Placa inválida. Ex.: AAA-1111");
+        }
     }
 
     public String salvarVeiculo(Veiculo veiculo) throws ServicoException {
