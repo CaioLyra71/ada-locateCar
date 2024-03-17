@@ -3,7 +3,6 @@ package infra;
 import infra.exceptions.BancoDadosException;
 import infra.interfaces.BancoDados;
 import model.cliente.ClientePessoaFisica;
-import repository.exceptions.RepositorioException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
